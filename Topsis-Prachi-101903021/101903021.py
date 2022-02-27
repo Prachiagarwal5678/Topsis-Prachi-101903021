@@ -41,7 +41,6 @@ def logging():
     except:
         print("File Not Found")
         sys.exit()
-    print(dataset)
     data=[]
     try:
         data=dataset.iloc[ :,1:].values.astype(float)
@@ -50,6 +49,8 @@ def logging():
         sys.exit()
     data=dataset.iloc[ :,1:].values.astype(float)
     (r,c)=data.shape
+    (rows,columns)=dataset.shape
+
 
     if c<3:
         raise Exception("Insufficient data in CSV file(less than 3 columns)")
@@ -59,7 +60,7 @@ def logging():
         raise Exception("Weights data not matched with input file")
     if len(impacts) != c:
         raise Exception("Impacts data not matched with input file")
-    topsis_cal(temp_dataset,dataset,c,weights,impacts)
+    topsis_cal(temp_dataset,dataset,columns,weights,impacts)
     dataset.to_csv(outputFile,index=False)
     
     
